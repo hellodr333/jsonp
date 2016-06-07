@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>天气预报</title>
+<style type="text/css">
+li{list-style:none;}
+</style>
+<script type="text/javascript" src="jquery-1.7.2.js"></script>
+<script>
+function show(json){
+	console.log(json);
+	for(var key in json){
+		var s=' <li>今天天气：'+json.result[0].weather+'</li>\
+				<li>最高温度：'+json.result[0].temp_high+'</li>\
+				<li>最低温度：'+json.result[0].temp_low+'</li><br/><br/>\
+				<li>明天天气'+json.result[1].weather+'</li>\
+				<li>最高温度：'+json.result[1].temp_high+'</li>\
+				<li>最低温度：'+json.result[1].temp_low+'</li><br/><br/>\
+				<li>后天天气'+json.result[2].weather+'</li>\
+				<li>最高温度：'+json.result[2].temp_high+'</li>\
+				<li>最低温度：'+json.result[2].temp_low+'</li>';
+
+		document.getElementById('list').innerHTML=s;	
+
+	}
+};
+
+window.onload=function (){
+	var oTxt=document.getElementById('sel');
+	var oS=document.createElement('script');
+		oS.src="http://api.k780.com:88/?app=weather.future&weaid=" + oTxt.value + "&appkey=18549&sign=157314daa35aff793a369a34faa29808&format=json&jsoncallback=show";
+		document.head.appendChild(oS);
+
+
+	oTxt.onchange=function (){
+		var oS=document.createElement('script');
+		oS.src="http://api.k780.com:88/?app=weather.future&weaid=" + oTxt.value + "&appkey=18549&sign=157314daa35aff793a369a34faa29808&format=json&jsoncallback=show";
+		document.head.appendChild(oS);
+	};
+};
+
+</script>
+</head>
+
+<body>
+<select name="" id="sel">
+	<option value="上海">上海</option>
+	<option value="北京">北京</option>
+	<option value="广州">广州</option>
+</select>
+<ul id="list">
+<!-- 	<li>今天天气：晴</li>
+	<li>最高温度：29</li>
+	<li>最低温度：10</li> -->
+</ul>
+</body>
+</html>
+
+
+
+
+
+
+
