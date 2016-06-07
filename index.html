@@ -4,7 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>天气预报</title>
 <style type="text/css">
+body{padding:100px;font-family: "yahei"}
 li{list-style:none;}
+p{font-size:14px;}
+a{text-decoration: none;}
 </style>
 <script type="text/javascript" src="jquery-1.7.2.js"></script>
 <script>
@@ -14,25 +17,20 @@ function show(json){
 		var s=' <li>今天天气：'+json.result[0].weather+'</li>\
 				<li>最高温度：'+json.result[0].temp_high+'</li>\
 				<li>最低温度：'+json.result[0].temp_low+'</li><br/><br/>\
-				<li>明天天气'+json.result[1].weather+'</li>\
+				<li>明天天气：'+json.result[1].weather+'</li>\
 				<li>最高温度：'+json.result[1].temp_high+'</li>\
 				<li>最低温度：'+json.result[1].temp_low+'</li><br/><br/>\
-				<li>后天天气'+json.result[2].weather+'</li>\
+				<li>后天天气：'+json.result[2].weather+'</li>\
 				<li>最高温度：'+json.result[2].temp_high+'</li>\
 				<li>最低温度：'+json.result[2].temp_low+'</li>';
-
 		document.getElementById('list').innerHTML=s;	
-
 	}
 };
-
 window.onload=function (){
 	var oTxt=document.getElementById('sel');
 	var oS=document.createElement('script');
 		oS.src="http://api.k780.com:88/?app=weather.future&weaid=" + oTxt.value + "&appkey=18549&sign=157314daa35aff793a369a34faa29808&format=json&jsoncallback=show";
 		document.head.appendChild(oS);
-
-
 	oTxt.onchange=function (){
 		var oS=document.createElement('script');
 		oS.src="http://api.k780.com:88/?app=weather.future&weaid=" + oTxt.value + "&appkey=18549&sign=157314daa35aff793a369a34faa29808&format=json&jsoncallback=show";
@@ -44,16 +42,21 @@ window.onload=function (){
 </head>
 
 <body>
+<p>天气预报（运用 jsonp跨域请求百度开放接口）</p>
 <select name="" id="sel">
 	<option value="上海">上海</option>
 	<option value="北京">北京</option>
 	<option value="广州">广州</option>
+	<option value="深圳">深圳</option>
+	<option value="南京">南京</option>
 </select>
 <ul id="list">
 <!-- 	<li>今天天气：晴</li>
 	<li>最高温度：29</li>
 	<li>最低温度：10</li> -->
 </ul>
+
+<h3><a href="weather_jQuery.html">点击这里查看 jQuery ajax请求实现 jsonp </a></h3>
 </body>
 </html>
 

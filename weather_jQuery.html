@@ -4,33 +4,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>天气预报</title>
 <style type="text/css">
+body{padding:100px;font-family: "yahei"}
 li{list-style:none;}
+
 </style>
 <script type="text/javascript" src="jquery-1.7.2.js"></script>
 <script>
 $(function(){
-	// $.ajax({
-	// 		"type":'get',
-	// 		"url":"http://api.k780.com:88/?app=weather.future&weaid=" + $("#sel").val()+ "&appkey=18549&sign=157314daa35aff793a369a34faa29808&format=json&jsoncallback=show",
-	// 		"dataType":"jsonp",
-	// 		"async": false,
-	// 		"jsonp":'callback',
-	// 		"jsonpCallback":'show',
-	// 		"success":function(json){
-	// 			console.log(json.result)
-	// 			var s="";
-	// 			json.result.forEach(function(e){
-	// 				s="<li>今天日期："+e.days+"</li>\
-	// 					<li>今天天气："+e.weather+"</li>\
-	// 					<li>最高温度："+e.temp_high+"</li>\
-	// 					<li>最低温度："+e.temp_low+"</li>"
-	// 			})
-	// 			$("#list").empty().append(s)
-	// 		},
-	// 		"error":function(){
-	// 			console.log('error')
-	// 		}
-	// 	})
+	$.ajax({
+			"type":'get',
+			"url":"http://api.k780.com:88/?app=weather.future&weaid=" + $("#sel").val()+ "&appkey=18549&sign=157314daa35aff793a369a34faa29808&format=json&jsoncallback=show",
+			"dataType":"jsonp",
+			"async": false,
+			"jsonp":'callback',
+			"jsonpCallback":'show',
+			"success":function(json){
+				var s="";
+				$.each(json.result,function(n,value){
+					s+="<li>日期："+value.days+"</li>\
+						<li>天气："+value.weather+"</li>\
+						<li>最高温度："+value.temp_high+"</li>\
+						<li>最低温度："+value.temp_low+"</li><br/><br/>"
+				})
+				$("#list").empty().append(s)
+			},
+			"error":function(){
+				console.log('error')
+			}
+		})
 
 	$("#sel").click(function(){
 		$.ajax({
@@ -44,33 +45,12 @@ $(function(){
 				console.log(json.result)
 				var s="";
 				$.each(json.result,function(n,value){
-					//console.log(value);
-					s="<li>今天日期："+value.days+"</li>\
-						<li>今天天气："+value.weather+"</li>\
+					s+="<li>日期："+value.days+"</li>\
+						<li>天气："+value.weather+"</li>\
 						<li>最高温度："+value.temp_high+"</li>\
-						<li>最低温度："+value.temp_low+"</li>"
+						<li>最低温度："+value.temp_low+"</li><br/><br/>"
 				});
-				console.log(s);
 				$("#list").empty().append(s);
-				// json.result.forEach(function(e){
-				// 	s="<li>今天日期："+e.days+"</li>\
-				// 		<li>今天天气："+e.weather+"</li>\
-				// 		<li>最高温度："+e.temp_high+"</li>\
-				// 		<li>最低温度："+e.temp_low+"</li>"
-				// })
-				// $("#list").empty().append(s)
-
-				//用原生遍历
-				// for(var i=0;i<json.result.length;i++){
-				// 	//console.log(json.result[i].citynm)
-				// 	s="<li>今天日期："+json.result[i].days+"</li>\
-				// 		<li>今天天气："+json.result[i].weather+"</li>\
-				// 		<li>最高温度："+json.result[i].temp_high+"</li>\
-				// 		<li>最低温度："+json.result[i].temp_low+"</li>"
-				// 	 $("#list").empty().append(s)
-				// }
-
-
 				//setTimeout("javascript:location.href='http://www.baidu.com/'", 2500);  //实现页面内容的跳转
 			},
 			"error":function(){
@@ -83,10 +63,13 @@ $(function(){
 </script>
 </head>
 <body>
+一周天气预报
 <select name="" id="sel">
 	<option value="上海">上海</option>
 	<option value="北京">北京</option>
 	<option value="广州">广州</option>
+	<option value="深圳">深圳</option>
+	<option value="南京">南京</option>
 </select>
 <ul id="list">
 <!-- 	<li>今天天气：晴</li>
